@@ -4,33 +4,29 @@ import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import ru.aurorahost.ppmtool.domain.Project;
+import ru.aurorahost.ppmtool.service.MapValidationErrorService;
 import ru.aurorahost.ppmtool.service.ProjectService;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/project")
 public class ProjectController {
 
     private final ProjectService projectService;
+    private final MapValidationErrorService validationService;
 
-    public ProjectController(ProjectService projectService) {
+    public ProjectController(ProjectService projectService, MapValidationErrorService validationService) {
         this.projectService = projectService;
+        this.validationService = validationService;
     }
 
     @PostMapping("")
     public ResponseEntity<?> createNewProject(@Valid @RequestBody Project project, BindingResult result) {
-        if (result.hasErrors()) {
-            Map<String, String> errorMap = new HashMap<>();
-            for(FieldError fieldError : result.getFieldErrors()) {
-                errorMap.put(fieldError.getField(), fieldError.getDefaultMessage());
-            }
-            return new ResponseEntity<>(errorMap, HttpStatus.BAD_REQUEST);
-        }
+
+        ResponseEntity<?> errorMap = validationService.MapValidationService(result);
+        if (errorMap != null) return errorMap;
+
         Project savedProject = projectService.saveOrUpdateProject(project);
         return new ResponseEntity<>(savedProject, HttpStatus.CREATED);
     }
