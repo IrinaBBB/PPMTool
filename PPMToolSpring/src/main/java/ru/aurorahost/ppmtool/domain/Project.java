@@ -2,9 +2,10 @@ package ru.aurorahost.ppmtool.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+
 import java.util.Date;
 
 @Entity
