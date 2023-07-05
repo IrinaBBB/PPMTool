@@ -1,12 +1,14 @@
-import './App.css';
+import "./App.css";
 import Dashboard from "./components/Dashboard";
+import Header from "./components/Layout/Header";
 
 function App() {
-  return (
-    <div>
-      <Dashboard/>
-    </div>
-  );
+    return (
+        <div>
+            <Header />
+            <Dashboard />
+        </div>
+    );
 }
 
 export default App;
