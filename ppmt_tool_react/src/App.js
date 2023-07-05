@@ -4,10 +4,10 @@ import Header from "./components/Layout/Header";
 
 function App() {
     return (
-        <div>
+        <>
             <Header />
             <Dashboard />
-        </div>
+        </>
     );
 }
 
