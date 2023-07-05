@@ -2,6 +2,7 @@ package ru.aurorahost.ppmtool.service;
 
 import org.springframework.stereotype.Service;
 import ru.aurorahost.ppmtool.domain.Project;
+import ru.aurorahost.ppmtool.exception.ProjectIdException;
 import ru.aurorahost.ppmtool.repository.ProjectRepository;
 
 @Service
@@ -15,6 +16,12 @@ public class ProjectService {
     }
 
     public Project saveOrUpdateProject(Project project) {
-        return projectRepository.save(project);
+        try {
+            project.setProjectIdentifier(project.getProjectIdentifier().toUpperCase());
+            return projectRepository.save(project);
+        } catch (Exception e) {
+            throw new ProjectIdException("Project ID '" + project.getProjectIdentifier().toUpperCase() + "' already " +
+                    "exists");
+        }
     }
 }
