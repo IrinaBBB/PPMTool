@@ -41,4 +41,10 @@ public class ProjectController {
         Project savedProject = projectService.saveOrUpdateProject(project);
         return new ResponseEntity<>(savedProject, HttpStatus.CREATED);
     }
+
+    @DeleteMapping("/{projectId}")
+    public ResponseEntity<?> deleteProjectById(@PathVariable String projectId) {
+        projectService.deleteProjectByProjectId(projectId);
+        return new ResponseEntity<>("Project with id '" + projectId + "' has been deleted.", HttpStatus.OK);
+    }
 }
