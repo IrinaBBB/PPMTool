@@ -27,7 +27,7 @@ public class Project {
     private String description;
 
     @JsonFormat(pattern = "yyyy-mm-dd")
-    private Date startSate;
+    private Date startDate;
 
     @JsonFormat(pattern = "yyyy-mm-dd")
     private Date endDate;
@@ -82,12 +82,12 @@ public class Project {
         this.description = description;
     }
 
-    public Date getStartSate() {
-        return startSate;
+    public Date getStartDate() {
+        return startDate;
     }
 
-    public void setStartSate(Date startSate) {
-        this.startSate = startSate;
+    public void setStartDate(Date startSate) {
+        this.startDate = startSate;
     }
 
     public Date getEndDate() {
