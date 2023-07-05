@@ -21,6 +21,17 @@ public class ProjectController {
         this.validationService = validationService;
     }
 
+    @GetMapping("/all")
+    public Iterable<Project> getAllProjects() {
+        return projectService.findAllProjects();
+    }
+
+    @GetMapping("/{projectId}")
+    public ResponseEntity<?> getProjectById(@PathVariable String projectId) {
+        Project project = projectService.findProjectByProjectId(projectId);
+        return new ResponseEntity<>(project, HttpStatus.OK);
+    }
+
     @PostMapping("")
     public ResponseEntity<?> createNewProject(@Valid @RequestBody Project project, BindingResult result) {
 
