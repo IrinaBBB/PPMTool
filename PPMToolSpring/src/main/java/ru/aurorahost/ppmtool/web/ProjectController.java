@@ -11,7 +11,7 @@ import ru.aurorahost.ppmtool.service.ProjectService;
 
 @RestController
 @RequestMapping("/api/project")
-@CrossOrigin("http://localhost:3000/")
+@CrossOrigin("http://localhost:3000")
 public class ProjectController {
 
     private final ProjectService projectService;
