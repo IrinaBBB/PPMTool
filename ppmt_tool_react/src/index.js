@@ -8,6 +8,7 @@ import AddProject from "./components/Project/AddProject";
 import Header from "./components/Layout/Header";
 import { Provider } from "react-redux";
 import store from "./store";
+import Test from "./components/Layout/Test";
 
 // const root = ReactDOM.createRoot(document.getElementById('root'));
 // root.render(
@@ -17,6 +18,10 @@ import store from "./store";
 // );
 
 const router = createBrowserRouter([
+    {
+        path: "/dashboard",
+        element: <Test />,
+    },
     {
         path: "/addProject",
         element: <AddProject />,

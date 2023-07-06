@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { createProject } from "../../actions/projectActions";
+import PropTypes from "prop-types";
 
 class AddProject extends Component {
     constructor() {
@@ -15,7 +18,7 @@ class AddProject extends Component {
     }
 
     onChange(e) {
-        this.setState({[e.target.name]: e.target.value});
+        this.setState({ [e.target.name]: e.target.value });
     }
 
     onSubmit(e) {
@@ -26,8 +29,8 @@ class AddProject extends Component {
             description: this.state.description,
             startDate: this.state.startDate,
             endDate: this.state.endDate,
-        }
-        console.log(newProject);
+        };
+        this.props.createProject(newProject, this.props.history);
     }
 
     render() {
@@ -60,7 +63,6 @@ class AddProject extends Component {
                                             name="projectIdentifier"
                                             value={this.state.projectIdentifier}
                                             onChange={this.onChange}
-
                                         />
                                     </div>
                                     <div className="form-group">
@@ -106,4 +108,8 @@ class AddProject extends Component {
     }
 }
 
-export default AddProject;
+AddProject.propTypes = {
+    createProject: PropTypes.func.isRequired,
+};
+
+export default connect(null, { createProject })(AddProject);
