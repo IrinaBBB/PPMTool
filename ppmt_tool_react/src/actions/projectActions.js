@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { GET_ERRORS } from './types';
 
-export const createProject = (project, navigate) => {
+export const createProject = (project, history) => {
     return async (dispatch) => {
         try {
             const res = await axios.post(

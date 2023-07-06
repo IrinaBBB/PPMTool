@@ -1,17 +1,18 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { createProject } from "../../actions/projectActions";
-import PropTypes from "prop-types";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { createProject } from '../../actions/projectActions';
+import PropTypes from 'prop-types';
+import {useNavigate} from "react-router-dom";
 
 class AddProject extends Component {
     constructor() {
         super();
         this.state = {
-            projectName: "",
-            projectIdentifier: "",
-            description: "",
-            startDate: "",
-            endDate: "",
+            projectName: '',
+            projectIdentifier: '',
+            description: '',
+            startDate: '',
+            endDate: '',
         };
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
