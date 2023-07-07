@@ -1,8 +1,10 @@
 package ru.aurorahost.ppmtool.service;
 
 import org.springframework.stereotype.Service;
+import ru.aurorahost.ppmtool.domain.Backlog;
 import ru.aurorahost.ppmtool.domain.Project;
 import ru.aurorahost.ppmtool.exception.ProjectIdException;
+import ru.aurorahost.ppmtool.repository.BacklogRepository;
 import ru.aurorahost.ppmtool.repository.ProjectRepository;
 
 @Service
@@ -10,14 +12,26 @@ public class ProjectService {
 
     final
     ProjectRepository projectRepository;
+    final BacklogRepository backlogRepository;
 
-    public ProjectService(ProjectRepository projectRepository) {
+    public ProjectService(ProjectRepository projectRepository, BacklogRepository backlogRepository) {
         this.projectRepository = projectRepository;
+        this.backlogRepository = backlogRepository;
     }
 
     public Project saveOrUpdateProject(Project project) {
         try {
             project.setProjectIdentifier(project.getProjectIdentifier().toUpperCase());
+            if (project.getId() == null) {
+                Backlog backlog = new Backlog();
+                project.setBacklog(backlog);
+                backlog.setProject(project);
+                backlog.setProjectIdentifier(project.getProjectIdentifier().toUpperCase());
+            }
+
+            if (project.getId() != null) {
+                project.setBacklog(backlogRepository.findByProjectIdentifier(project.getProjectIdentifier().toUpperCase()));
+            }
             return projectRepository.save(project);
         } catch (Exception e) {
             throw new ProjectIdException("Project ID '" + project.getProjectIdentifier().toUpperCase() + "' already " +
