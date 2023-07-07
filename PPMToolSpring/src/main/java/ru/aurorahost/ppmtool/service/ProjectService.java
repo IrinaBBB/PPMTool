@@ -10,9 +10,9 @@ import ru.aurorahost.ppmtool.repository.ProjectRepository;
 @Service
 public class ProjectService {
 
-    final
+    private final
     ProjectRepository projectRepository;
-    final BacklogRepository backlogRepository;
+    private final BacklogRepository backlogRepository;
 
     public ProjectService(ProjectRepository projectRepository, BacklogRepository backlogRepository) {
         this.projectRepository = projectRepository;

@@ -13,15 +13,11 @@ public class ProjectTask {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
     @Column(updatable = false)
     private String projectSequence;
-
     @NotBlank(message = "Please include a project summary")
     private String summary;
-
     private String acceptanceCriteria;
-
     private String status;
     private Integer priority;
     private Date dueDate;
@@ -128,6 +124,14 @@ public class ProjectTask {
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public Backlog getBacklog() {
+        return backlog;
+    }
+
+    public void setBacklog(Backlog backlog) {
+        this.backlog = backlog;
     }
 
     @Override
