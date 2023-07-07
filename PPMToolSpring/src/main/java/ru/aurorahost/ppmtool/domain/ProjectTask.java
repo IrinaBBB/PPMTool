@@ -1,5 +1,6 @@
 package ru.aurorahost.ppmtool.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
@@ -30,6 +31,11 @@ public class ProjectTask {
     private String projectIdentifier;
     private Date createdAt;
     private Date updatedAt;
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
+    @JoinColumn(name = "backlog_id", updatable = false, nullable = false)
+    @JsonIgnore
+    private Backlog backlog;
 
     public ProjectTask() {
     }
