@@ -65,12 +65,18 @@ public class ProjectTaskService {
         if (backlog == null) {
             throw new ProjectNotFoundException("Project with ID: '" + backlog_id + "' does not exist");
         }
- 
+
         ProjectTask projectTask = projectTaskRepository.findByProjectSequence(pt_id);
         if (projectTask == null) {
             throw new ProjectNotFoundException("Project Task '" + pt_id + "' not found");
         }
 
         return projectTask;
+    }
+
+    public ProjectTask updateByProjectSequence(ProjectTask updatedTask, String backlog_id, String pt_id) {
+        ProjectTask projectTask = projectTaskRepository.findByProjectSequence(pt_id);
+        projectTask = updatedTask;
+        return projectTaskRepository.save(projectTask);
     }
 }

@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.aurorahost.ppmtool.domain.Project;
+import ru.aurorahost.ppmtool.domain.ProjectTask;
 import ru.aurorahost.ppmtool.service.MapValidationErrorService;
 import ru.aurorahost.ppmtool.service.ProjectService;
 
